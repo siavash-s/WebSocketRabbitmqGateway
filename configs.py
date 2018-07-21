@@ -7,3 +7,33 @@ web_api_conf = {
 cookie_authorization = {
     "TOKEN_KEY": "token"
 }
+
+
+#  the key is the WebSocket topic,
+#  the value is a list of RabbitMQ topic information with keys representing RabbitMQ topics,
+#  exchange name, exchange type, topic name and the callable hook that recieves input from rabbit topic and
+#  its output will be used for the WebSocket topic.
+ws_rmq_topics = {
+    "alerts": [
+        {
+            "exchange_name": "notification",
+            "exchange_type": "topic",
+            "topic": "sphex.notification.warning",
+            "hook": lambda data: data,
+        },
+        {
+            "exchange_name": "notification",
+            "exchange_type": "topic",
+            "topic": "sphex.notification.error",
+            "hook": lambda data: data,
+        }
+    ],
+    "activities": [
+        {
+            "exchange_name": "notification",
+            "exchange_type": "topic",
+            "topic": "sphex.notification.info",
+            "hook": lambda data: data,
+        }
+    ],
+}
