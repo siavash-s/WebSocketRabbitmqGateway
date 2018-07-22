@@ -37,3 +37,10 @@ ws_rmq_topics = {
         }
     ],
 }
+
+# pika.connection.Parameters compatible
+rabbitmq_connection = {
+    'host': "localhost",
+}
+
+rabbitmq_connection_sleep_retry = 30
