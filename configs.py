@@ -44,3 +44,10 @@ rabbitmq_connection = {
 }
 
 rabbitmq_connection_sleep_retry = 30
+
+websocket_url = "ws://localhost:9000/"
+
+server_address = {
+    "address": "0.0.0.0",
+    "port": 9000
+}
