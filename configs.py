@@ -1,5 +1,8 @@
+import os
+import pika
+
 web_api_conf = {
-    "identity_authorization_url": "http://localhost:5000/user_info",
+    "identity_authorization_url": os.environ.get("AUTHORIZATION_URL", "http://api/user_info"),
     "authorization_header_key": "Authorization",
     "authorization_header_prefix": "Bearer"
 }
@@ -40,12 +43,15 @@ ws_rmq_topics = {
 
 # pika.connection.Parameters compatible
 rabbitmq_connection = {
-    'host': "localhost",
+    'host': os.environ.get("RABBITMQ_HOST", "rabbitmq"),
+    'port': int(os.environ.get("RABBITMQ_PORT", 5672)),
+    'credentials': pika.PlainCredentials(
+        os.environ.get('RABBITMQ_USER', 'guest'),
+        os.environ.get('RABBITMQ_PASSWORD', 'guest')
+    )
 }
 
 rabbitmq_connection_sleep_retry = 30
-
-websocket_url = "ws://localhost:9000/"
 
 server_address = {
     "address": "0.0.0.0",

@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 mq_conf["hook"]
             ).start()
 
-    factory = WebSocketServerFactory(configs.websocket_url)
+    factory = WebSocketServerFactory()
     factory.protocol = SubscriptionGatewayServerProtocol
     factory.setProtocolOptions(autoPingInterval=60)
     loop = asyncio.get_event_loop()
