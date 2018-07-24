@@ -1,4 +1,5 @@
 from logging.config import dictConfig
+import sys
 
 
 def set_syslog_logging(syslog_addr="/dev/log", level='INFO', prefix=''):
@@ -9,13 +10,13 @@ def set_syslog_logging(syslog_addr="/dev/log", level='INFO', prefix=''):
         'formatters': {'default': {
             'format': '{} [%(asctime)s] %(levelname)s in %(module)s: %(message)s'.format(prefix)
         }},
-        'handlers': {'syslog': {
-            'class': 'logging.handlers.SysLogHandler',
-            'address': syslog_addr,
+        'handlers': {'stream': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
             'formatter': 'default',
         }},
         'root': {
             'level': level,
-            'handlers': ['syslog']
+            'handlers': ['stream']
         }
     })
