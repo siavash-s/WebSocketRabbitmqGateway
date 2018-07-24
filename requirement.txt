@@ -2,6 +2,8 @@ autobahn==18.6.1
 certifi==2018.4.16
 chardet==3.0.4
 idna==2.7
+marshmallow==3.0.0b11
+pika==0.12.0
 requests==2.19.1
 six==1.11.0
 txaio==2.10.0
