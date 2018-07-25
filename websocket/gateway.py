@@ -96,7 +96,7 @@ class SubscriptionGatewayServerProtocol(WebSocketServerProtocol):
 
     def onClose(self, wasClean, code, reason):
         getLogger().info(
-            "client '{}' closed the connection".format(self.peer)
+            "client '{}' closed the connection, reason: {}".format(self.peer, reason)
         )
         for connections_sets in list(self.subscription_connections.values()):
             if self in connections_sets:
