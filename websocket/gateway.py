@@ -1,13 +1,10 @@
 from json import JSONDecodeError
 from logging import getLogger
 from autobahn.asyncio import WebSocketServerProtocol
-from autobahn.websocket import ConnectionDeny
 from marshmallow import ValidationError
 from authorization.web_api_authorization import AuthorizeByWebApi
 from configs import ws_rmq_topics
-from messages.messages import errors
 from schema.schema import SubscriptionRequest, SubscriptionResponse, PublishPayload
-from websocket.utils import get_token_from_cookie
 
 
 class SubscriptionGatewayServerProtocol(WebSocketServerProtocol):
@@ -16,16 +13,7 @@ class SubscriptionGatewayServerProtocol(WebSocketServerProtocol):
     authorization_class = AuthorizeByWebApi
 
     def onConnect(self, request):
-        try:
-            raw_cookie = request.headers['cookie']
-        except KeyError:
-            raise ConnectionDeny(400, errors.get("NO_COOKIE", ''))
-        else:
-            token = get_token_from_cookie(raw_cookie)
-            if not token:
-                raise ConnectionDeny(400, errors.get("TOKEN_COOKIE_PARSE", ""))
-            if not self.authorization_class(token).authorize_identity():
-                raise ConnectionDeny(401, errors.get("INVALID_TOKEN", ""))
+        getLogger().info("Client '{}' connected".format(self.peer))
 
     def onMessage(self, payload, isBinary):
         if not isBinary:
