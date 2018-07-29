@@ -26,3 +26,9 @@ class SubscriptionResponse(Schema):
 class PublishPayload(Schema):
     topic = fields.Str(required=True, dump_only=True)
     payload = CustomField(required=True, dump_only=True)
+
+
+class SphexNotification(Schema):
+    ticket_id = fields.Str(load_only=True)
+    msg = fields.Str(load_only=True)
+    history_id = fields.Int(load_only=True)

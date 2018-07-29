@@ -1,5 +1,7 @@
 import os
 import pika
+from schema.schema import SphexNotification
+from utils.convertors import json_deserializer_factory
 
 web_api_conf = {
     "identity_authorization_url": os.environ.get("AUTHORIZATION_URL", "http://api/user_info"),
@@ -22,13 +24,13 @@ ws_rmq_topics = {
             "exchange_name": "notification",
             "exchange_type": "topic",
             "topic": "sphex.notification.warning",
-            "hook": lambda data: data,
+            "hook": json_deserializer_factory(SphexNotification),
         },
         {
             "exchange_name": "notification",
             "exchange_type": "topic",
             "topic": "sphex.notification.error",
-            "hook": lambda data: data,
+            "hook": json_deserializer_factory(SphexNotification),
         }
     ],
     "activities": [
@@ -36,7 +38,7 @@ ws_rmq_topics = {
             "exchange_name": "notification",
             "exchange_type": "topic",
             "topic": "sphex.notification.info",
-            "hook": lambda data: data,
+            "hook": json_deserializer_factory(SphexNotification),
         }
     ],
 }
