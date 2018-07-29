@@ -23,13 +23,13 @@ ws_rmq_topics = {
         {
             "exchange_name": "notification",
             "exchange_type": "topic",
-            "topic": "sphex.notification.warning",
+            "topic": "sphex.ticket.warning",
             "hook": json_deserializer_factory(SphexNotification),
         },
         {
             "exchange_name": "notification",
             "exchange_type": "topic",
-            "topic": "sphex.notification.error",
+            "topic": "sphex.ticket.error",
             "hook": json_deserializer_factory(SphexNotification),
         }
     ],
@@ -37,7 +37,7 @@ ws_rmq_topics = {
         {
             "exchange_name": "notification",
             "exchange_type": "topic",
-            "topic": "sphex.notification.info",
+            "topic": "sphex.ticket.info",
             "hook": json_deserializer_factory(SphexNotification),
         }
     ],
