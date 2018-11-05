@@ -1,4 +1,5 @@
 ## Client Usage guide
+##### In the project, It is assumed that there is a service validating JWT tokens from clients. 
 1. a client should include a valid JWT token in HTTP upgrade request cookie. the cookie should have a name/value like this:  
     token=valid-jwt-token
     The server reply a 400 bad request HTTP response if no cookie presented in the request.
